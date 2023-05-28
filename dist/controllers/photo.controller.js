@@ -14,14 +14,20 @@ async function getPhotos(req, res) {
 exports.getPhotos = getPhotos;
 ;
 async function createPhoto(req, res) {
-    const { title, description } = req.body;
-    const newPhoto = { title, description, imagePath: req.file.path };
-    const photo = new Photo_1.default(newPhoto);
-    await photo.save();
-    return res.json({
-        message: 'Photo Saved Successfully',
-        photo
-    });
+    try {
+        const { title, description } = req.body;
+        const newPhoto = { title, description, imagePath: req.file.path };
+        const photo = new Photo_1.default(newPhoto);
+        await photo.save();
+        return res.json({
+            message: 'Foto creada con éxito',
+            photo
+        });
+    }
+    catch (error) {
+        console.log("****************** Error en createPhoto ==>", error);
+        return res.status(500).send("Ocurrio un problema al crear la foto");
+    }
 }
 exports.createPhoto = createPhoto;
 ;

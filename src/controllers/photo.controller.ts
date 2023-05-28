@@ -11,14 +11,20 @@ export async function getPhotos(req: Request, res: Response): Promise<Response> 
 };
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
-    const { title, description } = req.body;
-    const newPhoto = { title, description, imagePath: req.file.path };
-    const photo = new Photo(newPhoto);
-    await photo.save();
-    return res.json({
-        message: 'Photo Saved Successfully',
-        photo
-    });
+    try {
+        const { title, description } = req.body;
+        const newPhoto = { title, description, imagePath: req.file.path };
+        const photo = new Photo(newPhoto);
+
+        await photo.save();
+        return res.json({
+            message: 'Foto creada con éxito',
+            photo
+        });
+    } catch (error) {
+        console.log("****************** Error en createPhoto ==>", error)
+        return res.status(500).send("Ocurrio un problema al crear la foto");
+    }
 };
 
 export async function getPhoto(req: Request, res: Response): Promise<Response> {

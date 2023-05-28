@@ -16,6 +16,11 @@ app.set('port', process.env.PORT || 4000);
 app.use(morgan_1.default('dev'));
 app.use(cors_1.default());
 app.use(express_1.default.json());
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 // Routes
 app.use('/api', index_1.default);
 // this folders for this application will be used to store public file images
