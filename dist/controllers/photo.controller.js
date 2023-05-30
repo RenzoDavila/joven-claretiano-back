@@ -25,7 +25,7 @@ async function createPhoto(req, res) {
         });
     }
     catch (error) {
-        console.log("****************** Error en createPhoto ==>", error);
+        console.log(" ****************** Error en createPhoto ==>", error);
         return res.status(500).send("Ocurrio un problema al crear la foto");
     }
 }

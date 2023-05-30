@@ -1,7 +1,9 @@
 import { Schema, model, Document } from 'mongoose'
 
 const schema = new Schema({
+    codigo: String,
     nombre: String,
+    mail: String,
     password: String,
     estado: String,
     ver: Boolean,
@@ -11,8 +13,10 @@ const schema = new Schema({
 });
 
 export interface IUser extends Document {
+    codigo: string;
     nombre: string;
-    password: string;
+    mail: string;
+    password: any;
     estado: string;
     ver: boolean;
     crear: boolean;

@@ -10,8 +10,12 @@ const photo_controller_1 = require("../controllers/photo.controller");
 const blog_controller_1 = require("../controllers/blog.controller");
 const tag_controller_1 = require("../controllers/tag.controller");
 const user_controller_1 = require("../controllers/user.controller");
+const login_controller_1 = require("../controllers/login.controller");
 // middleware
 // router.use(upload.single('file'));
+// routes login
+router.route('/login/')
+    .post(multer_1.default.single('file'), login_controller_1.login);
 // routes users
 router.route('/users/')
     .get(user_controller_1.getUsers)
@@ -19,7 +23,7 @@ router.route('/users/')
 router.route('/users/:id')
     .get(user_controller_1.getUser)
     .delete(user_controller_1.deleteUser)
-    .put(user_controller_1.updateUser);
+    .put(multer_1.default.single('file'), user_controller_1.updateUser);
 // routes tags
 router.route('/tags/')
     .get(tag_controller_1.getTags)
@@ -27,7 +31,7 @@ router.route('/tags/')
 router.route('/tags/:id')
     .get(tag_controller_1.getTag)
     .delete(tag_controller_1.deleteTag)
-    .put(tag_controller_1.updateTag);
+    .put(multer_1.default.single('file'), tag_controller_1.updateTag);
 // routes blogs
 router.route('/blogs')
     .get(blog_controller_1.getBlogs)
@@ -46,7 +50,7 @@ router.route('/blogs')
 router.route('/blogs/:id')
     .get(blog_controller_1.getBlog)
     .delete(blog_controller_1.deleteBlog)
-    .put(blog_controller_1.updateBlog);
+    .put(multer_1.default.single('file'), blog_controller_1.updateBlog);
 // routes photos
 router.route('/photos')
     .get(photo_controller_1.getPhotos)
@@ -54,5 +58,5 @@ router.route('/photos')
 router.route('/photos/:id')
     .get(photo_controller_1.getPhoto)
     .delete(photo_controller_1.deletePhoto)
-    .put(photo_controller_1.updatePhoto);
+    .put(multer_1.default.single('file'), photo_controller_1.updatePhoto);
 exports.default = router;

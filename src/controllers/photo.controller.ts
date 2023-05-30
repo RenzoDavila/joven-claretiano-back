@@ -22,7 +22,7 @@ export async function createPhoto(req: Request, res: Response): Promise<Response
             photo
         });
     } catch (error) {
-        console.log("****************** Error en createPhoto ==>", error)
+        console.log(" ****************** Error en createPhoto ==>", error)
         return res.status(500).send("Ocurrio un problema al crear la foto");
     }
 };

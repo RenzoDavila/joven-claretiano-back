@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const schema = new mongoose_1.Schema({
+    codigo: String,
     nombre: String,
+    mail: String,
     password: String,
     estado: String,
     ver: Boolean,

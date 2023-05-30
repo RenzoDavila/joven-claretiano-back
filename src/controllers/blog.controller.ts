@@ -26,7 +26,7 @@ export async function getBlogs(req: Request, res: Response): Promise<Response> {
 
         return res.json(blogs);
     } catch (error) {
-        console.log("****************** Error en getBlogs ==>", error);
+        console.log(" ****************** Error en getBlogs ==>", error);
         return res.status(500).send("Ocurrio un problema al buscar los blogs");
     }
 };
@@ -124,7 +124,7 @@ export async function createBlog(req: any, res: Response): Promise<Response> {
             blog
         });
     } catch (error) {
-        console.log("****************** Error en createBlog ==>", error);
+        console.log(" ****************** Error en createBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al crear el blog");
     }
 };
@@ -135,7 +135,7 @@ export async function getBlog(req: Request, res: Response): Promise<Response> {
         const blog = await Blog.findById(id);
         return res.json(blog);
     } catch (error) {
-        console.log("****************** Error en deleteBlog ==>", error);
+        console.log(" ****************** Error en deleteBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al buscar el blog");
     }
 }
@@ -154,7 +154,7 @@ export async function deleteBlog(req: Request, res: Response): Promise<Response>
         }
         return res.json({ message: 'Blog eliminado' });
     } catch (error) {
-        console.log("****************** Error en deleteBlog ==>", error);
+        console.log(" ****************** Error en deleteBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al eliminar el blog");
     }
 };
@@ -172,7 +172,7 @@ export async function updateBlog(req: Request, res: Response): Promise<Response>
             updatedBlog
         });
     } catch (error) {
-        console.log("****************** Error en updateBlog ==>", error);
+        console.log(" ****************** Error en updateBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al actualizar el blog");
 }
 }

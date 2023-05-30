@@ -26,7 +26,7 @@ async function getBlogs(req, res) {
         return res.json(blogs);
     }
     catch (error) {
-        console.log("****************** Error en getBlogs ==>", error);
+        console.log(" ****************** Error en getBlogs ==>", error);
         return res.status(500).send("Ocurrio un problema al buscar los blogs");
     }
 }
@@ -123,7 +123,7 @@ async function createBlog(req, res) {
         });
     }
     catch (error) {
-        console.log("****************** Error en createBlog ==>", error);
+        console.log(" ****************** Error en createBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al crear el blog");
     }
 }
@@ -136,7 +136,7 @@ async function getBlog(req, res) {
         return res.json(blog);
     }
     catch (error) {
-        console.log("****************** Error en deleteBlog ==>", error);
+        console.log(" ****************** Error en deleteBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al buscar el blog");
     }
 }
@@ -156,7 +156,7 @@ async function deleteBlog(req, res) {
         return res.json({ message: 'Blog eliminado' });
     }
     catch (error) {
-        console.log("****************** Error en deleteBlog ==>", error);
+        console.log(" ****************** Error en deleteBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al eliminar el blog");
     }
 }
@@ -176,7 +176,7 @@ async function updateBlog(req, res) {
         });
     }
     catch (error) {
-        console.log("****************** Error en updateBlog ==>", error);
+        console.log(" ****************** Error en updateBlog ==>", error);
         return res.status(500).send("Ocurrio un problema al actualizar el blog");
     }
 }

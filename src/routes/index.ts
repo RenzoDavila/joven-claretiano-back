@@ -6,19 +6,24 @@ import { getPhotos, createPhoto, deletePhoto, getPhoto, updatePhoto } from '../c
 import { getBlogs, createBlog, deleteBlog, getBlog, updateBlog } from '../controllers/blog.controller'
 import { getTags, createTag, deleteTag, getTag, updateTag } from '../controllers/tag.controller'
 import { getUsers, createUser, deleteUser, getUser, updateUser } from '../controllers/user.controller'
+import { login } from '../controllers/login.controller'
 
 // middleware
 // router.use(upload.single('file'));
 
+// routes login
+router.route('/login/')
+.post(upload.single('file'), login)
+
 // routes users
 router.route('/users/')
 .get(getUsers)
-.post(upload.single('file'), createUser);
+.post(upload.single('file'), createUser)
 
 router.route('/users/:id')
 .get(getUser)
 .delete(deleteUser)
-.put(updateUser);
+.put(upload.single('file'), updateUser);
 
 // routes tags
 router.route('/tags/')
@@ -28,7 +33,7 @@ router.route('/tags/')
 router.route('/tags/:id')
 .get(getTag)
 .delete(deleteTag)
-.put(updateTag);
+.put(upload.single('file'), updateTag);
 
 // routes blogs
 router.route('/blogs')
@@ -49,7 +54,7 @@ router.route('/blogs')
 router.route('/blogs/:id')
 .get(getBlog)
 .delete(deleteBlog)
-.put(updateBlog);
+.put(upload.single('file'), updateBlog);
 
 // routes photos
 router.route('/photos')
@@ -59,6 +64,6 @@ router.route('/photos')
 router.route('/photos/:id')
     .get(getPhoto)
     .delete(deletePhoto)
-    .put(updatePhoto);
+    .put(upload.single('file'), updatePhoto);
 
 export default router;
