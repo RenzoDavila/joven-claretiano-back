@@ -11,7 +11,7 @@ async function login(req, res) {
         const { user, pass } = req.body;
         const reqOjb = {};
         if (user.indexOf("@") != -1) {
-            reqOjb.mail = user;
+            reqOjb.email = user;
         }
         else {
             reqOjb.codigo = user;
@@ -27,7 +27,7 @@ async function login(req, res) {
             }
         }
         else {
-            return res.json({ message: 'El usuario no es correcto' });
+            return res.json({ message: 'El usuario no existe' });
         }
     }
     catch (error) {

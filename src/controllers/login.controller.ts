@@ -10,7 +10,7 @@ export async function login(req: Request, res: Response): Promise<Response> {
         const reqOjb:any = {};
 
         if(user.indexOf("@") != -1){
-            reqOjb.mail = user
+            reqOjb.email = user
         }else{
             reqOjb.codigo = user
         }

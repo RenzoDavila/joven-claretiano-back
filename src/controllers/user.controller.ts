@@ -16,11 +16,11 @@ export async function getUsers(req: Request, res: Response): Promise<Response> {
 
 export async function createUser(req: Request, res: Response): Promise<Response> {
     try {
-        const { codigo, nombre, mail, pass, estado, ver, crear, editar, eliminar } = req.body;
+        const { codigo, nombres, apellidos, email, pass, estado, ver, crear, editar, eliminar } = req.body;
 
         let password = await bcryptjs.hash(pass, 8)
 
-        const newUser = { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar };
+        const newUser = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar };
 
         const user = new User(newUser);
         await user.save();
@@ -49,7 +49,8 @@ export async function deleteUser(req: Request, res: Response): Promise<Response>
     try {
         const { id } = req.params;
         const user = await User.findByIdAndRemove(id) as IUser;
-        return res.json({ message: `Usuario "${user.nombre}" eliminado`});
+        console.log("eliminado a ", user)
+        return res.json({ message: `Usuario "${user.nombres} ${user.apellidos}" eliminado`});
     } catch (error) {
         console.log(" ****************** Error en deleteUser ==>", error);
         return res.status(500).send("Ocurrio un problema al eliminar el usuario");
@@ -59,10 +60,10 @@ export async function deleteUser(req: Request, res: Response): Promise<Response>
 export async function updateUser(req: Request, res: Response): Promise<Response> {
     try {
         const { id } = req.params;
-        const { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar } = req.body;
-        const body = { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar }
+        const { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar } = req.body;
+        const body = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar }
         const updatedUser = await User.findByIdAndUpdate(id, {
-            codigo, nombre, mail, password, estado, ver, crear, editar, eliminar
+            codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar
         });
         return res.json({
             message: 'Usuario actualizado',

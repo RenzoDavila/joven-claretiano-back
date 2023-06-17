@@ -12,8 +12,10 @@ const schema = new Schema({
     }],
     tag: String,
     tagDesc: String,
-    fecha: String,
+    dateEdited: Date,
+    dateCreated: Date,
     principalImagePath: String,
+    state: String,
 });
 
 export interface IBlog extends Document {
@@ -28,8 +30,10 @@ export interface IBlog extends Document {
     }];
     tag: string;
     tagDesc: string;
-    fecha: string;
+    dateEdited: Date;
+    dateCreated: Date;
     principalImagePath: string;
+    state: string,
 }
 
 export default model<IBlog>('Blog', schema);

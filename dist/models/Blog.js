@@ -13,7 +13,9 @@ const schema = new mongoose_1.Schema({
         }],
     tag: String,
     tagDesc: String,
-    fecha: String,
+    dateEdited: Date,
+    dateCreated: Date,
     principalImagePath: String,
+    state: String,
 });
 exports.default = mongoose_1.model('Blog', schema);

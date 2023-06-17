@@ -19,8 +19,8 @@ exports.getTags = getTags;
 ;
 async function createTag(req, res) {
     try {
-        const { color, description } = req.body;
-        const newTag = { color, description };
+        const { color, description, title } = req.body;
+        const newTag = { color, description, title };
         const tag = new Tag_1.default(newTag);
         await tag.save();
         return res.json({
@@ -63,11 +63,12 @@ exports.deleteTag = deleteTag;
 async function updateTag(req, res) {
     try {
         const { id } = req.params;
-        const { color, description } = req.body;
-        const body = { color, description };
+        const { color, description, title } = req.body;
+        const body = { color, description, title };
         const updatedTag = await Tag_1.default.findByIdAndUpdate(id, {
             color,
-            description
+            description,
+            title
         });
         return res.json({
             message: 'Tag actualizado',

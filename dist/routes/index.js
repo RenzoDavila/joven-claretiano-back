@@ -34,7 +34,6 @@ router.route('/tags/:id')
     .put(multer_1.default.single('file'), tag_controller_1.updateTag);
 // routes blogs
 router.route('/blogs')
-    .get(blog_controller_1.getBlogs)
     .post(multer_1.default.fields([
     { name: 'files0' },
     { name: 'files1' },
@@ -47,10 +46,29 @@ router.route('/blogs')
     { name: 'files8' },
     { name: 'files9' }
 ]), blog_controller_1.createBlog);
+router.route('/blogs/:number/:page/:sort')
+    .get(blog_controller_1.getBlogs);
+router.route('/blogs/last/:number')
+    .get(blog_controller_1.getBlogsLast);
+router.route('/blogs/popular/:number')
+    .get(blog_controller_1.getBlogsPopular);
 router.route('/blogs/:id')
     .get(blog_controller_1.getBlog)
     .delete(blog_controller_1.deleteBlog)
-    .put(multer_1.default.single('file'), blog_controller_1.updateBlog);
+    .put(multer_1.default.fields([
+    { name: 'files0' },
+    { name: 'files1' },
+    { name: 'files2' },
+    { name: 'files3' },
+    { name: 'files4' },
+    { name: 'files5' },
+    { name: 'files6' },
+    { name: 'files7' },
+    { name: 'files8' },
+    { name: 'files9' }
+]), blog_controller_1.updateBlog);
+router.route('/blogsAddView/:id')
+    .get(blog_controller_1.getBlogAddView);
 // routes photos
 router.route('/photos')
     .get(photo_controller_1.getPhotos)

@@ -3,7 +3,7 @@ const router = Router();
 
 import upload from '../libs/multer'
 import { getPhotos, createPhoto, deletePhoto, getPhoto, updatePhoto } from '../controllers/photo.controller'
-import { getBlogs, createBlog, deleteBlog, getBlog, updateBlog } from '../controllers/blog.controller'
+import { getBlogs, createBlog, deleteBlog, getBlog, updateBlog, getBlogAddView, getBlogsLast, getBlogsPopular } from '../controllers/blog.controller'
 import { getTags, createTag, deleteTag, getTag, updateTag } from '../controllers/tag.controller'
 import { getUsers, createUser, deleteUser, getUser, updateUser } from '../controllers/user.controller'
 import { login } from '../controllers/login.controller'
@@ -37,7 +37,6 @@ router.route('/tags/:id')
 
 // routes blogs
 router.route('/blogs')
-.get(getBlogs)
 .post(upload.fields([
     {name: 'files0'},
     {name: 'files1'},
@@ -51,10 +50,33 @@ router.route('/blogs')
     {name: 'files9'}
 ]), createBlog);
 
+router.route('/blogs/:number/:page/:sort')
+.get(getBlogs)
+
+router.route('/blogs/last/:number')
+.get(getBlogsLast)
+
+router.route('/blogs/popular/:number')
+.get(getBlogsPopular)
+
 router.route('/blogs/:id')
 .get(getBlog)
 .delete(deleteBlog)
-.put(upload.single('file'), updateBlog);
+.put(upload.fields([
+    {name: 'files0'},
+    {name: 'files1'},
+    {name: 'files2'},
+    {name: 'files3'},
+    {name: 'files4'},
+    {name: 'files5'},
+    {name: 'files6'},
+    {name: 'files7'},
+    {name: 'files8'},
+    {name: 'files9'}
+]), updateBlog);
+
+router.route('/blogsAddView/:id')
+.get(getBlogAddView)
 
 // routes photos
 router.route('/photos')

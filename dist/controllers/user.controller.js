@@ -20,9 +20,9 @@ exports.getUsers = getUsers;
 ;
 async function createUser(req, res) {
     try {
-        const { codigo, nombre, mail, pass, estado, ver, crear, editar, eliminar } = req.body;
+        const { codigo, nombres, apellidos, email, pass, estado, ver, crear, editar, eliminar } = req.body;
         let password = await bcryptjs_1.default.hash(pass, 8);
-        const newUser = { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar };
+        const newUser = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar };
         const user = new User_1.default(newUser);
         await user.save();
         return res.json({
@@ -54,7 +54,8 @@ async function deleteUser(req, res) {
     try {
         const { id } = req.params;
         const user = await User_1.default.findByIdAndRemove(id);
-        return res.json({ message: `Usuario "${user.nombre}" eliminado` });
+        console.log("eliminado a ", user);
+        return res.json({ message: `Usuario "${user.nombres} ${user.apellidos}" eliminado` });
     }
     catch (error) {
         console.log(" ****************** Error en deleteUser ==>", error);
@@ -66,10 +67,10 @@ exports.deleteUser = deleteUser;
 async function updateUser(req, res) {
     try {
         const { id } = req.params;
-        const { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar } = req.body;
-        const body = { codigo, nombre, mail, password, estado, ver, crear, editar, eliminar };
+        const { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar } = req.body;
+        const body = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar };
         const updatedUser = await User_1.default.findByIdAndUpdate(id, {
-            codigo, nombre, mail, password, estado, ver, crear, editar, eliminar
+            codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar
         });
         return res.json({
             message: 'Usuario actualizado',

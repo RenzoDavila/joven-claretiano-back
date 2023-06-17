@@ -15,8 +15,8 @@ export async function getTags(req: Request, res: Response): Promise<Response> {
 
 export async function createTag(req: Request, res: Response): Promise<Response> {
     try {
-        const { color, description } = req.body;
-        const newTag = { color, description };
+        const { color, description, title } = req.body;
+        const newTag = { color, description, title };
         const tag = new Tag(newTag);
         await tag.save();
         return res.json({
@@ -54,11 +54,12 @@ export async function deleteTag(req: Request, res: Response): Promise<Response> 
 export async function updateTag(req: Request, res: Response): Promise<Response> {
     try {
         const { id } = req.params;
-        const { color, description } = req.body;
-        const body = { color, description }
+        const { color, description, title } = req.body;
+        const body = { color, description, title }
         const updatedTag = await Tag.findByIdAndUpdate(id, {
             color,
-            description
+            description,
+            title
         });
         return res.json({
             message: 'Tag actualizado',
