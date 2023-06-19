@@ -8,8 +8,33 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = __importDefault(require("../models/User"));
 async function getUsers(req, res) {
     try {
-        const users = await User_1.default.find();
-        return res.json(users);
+        const { number, page, sort } = req.params;
+        const num = Number(number);
+        const pag = Number(page) - 1;
+        const skip = num * pag;
+        const sortByDate = { dateCreated: -1 };
+        let pagination = 0;
+        let residue = 0;
+        let data = {};
+        data.registers = 0;
+        data.pagination = 0;
+        data.page = 0;
+        console.log("sort", sort);
+        let registers = await User_1.default.find().count();
+        if (registers > 0) {
+            pagination = Math.floor(registers / num);
+            residue = Math.floor(registers % num);
+            if (residue > 0) {
+                pagination = pagination + 1;
+            }
+            data.registers = registers;
+            data.pagination = pagination;
+            data.page = Number(page);
+        }
+        ;
+        // data.data = await User.find().sort({dateCreated: -1}).skip(skip).limit(num);
+        data.data = await User_1.default.find().skip(skip).limit(num);
+        return res.json(data);
     }
     catch (error) {
         console.log(" ****************** Error en getUsers ==>", error);

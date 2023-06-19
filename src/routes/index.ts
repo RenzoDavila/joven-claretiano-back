@@ -17,8 +17,10 @@ router.route('/login/')
 
 // routes users
 router.route('/users/')
-.get(getUsers)
 .post(upload.single('file'), createUser)
+
+router.route('/users/:number/:page/:sort')
+.get(getUsers)
 
 router.route('/users/:id')
 .get(getUser)

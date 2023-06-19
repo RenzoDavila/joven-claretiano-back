@@ -11,15 +11,30 @@ async function getBlogs(req, res) {
     try {
         const { number, page, sort } = req.params;
         const num = Number(number);
-        const pag = Number(page);
+        const pag = Number(page) - 1;
         const skip = num * pag;
         const sortByDate = { dateCreated: -1 };
-        console.log("num", num);
-        console.log("skip", skip);
+        let pagination = 0;
+        let residue = 0;
+        let data = {};
+        data.registers = 0;
+        data.pagination = 0;
+        data.page = 0;
         console.log("sort", sort);
-        let blogs = await Blog_1.default.find().sort({ dateCreated: -1 }).skip(skip).limit(num);
-        // let blogs = await Blog.find().sort(sortByDate).skip(4);
-        return res.json(blogs);
+        let registers = await Blog_1.default.find().count();
+        if (registers > 0) {
+            pagination = Math.floor(registers / num);
+            residue = Math.floor(registers % num);
+            if (residue > 0) {
+                pagination = pagination + 1;
+            }
+            data.registers = registers;
+            data.pagination = pagination;
+            data.page = Number(page);
+        }
+        ;
+        data.data = await Blog_1.default.find().sort({ dateCreated: -1 }).skip(skip).limit(num);
+        return res.json(data);
     }
     catch (error) {
         console.log(" ****************** Error en getBlogs ==>", error);
@@ -58,6 +73,57 @@ async function getBlogsPopular(req, res) {
 }
 exports.getBlogsPopular = getBlogsPopular;
 ;
+// Funcion para crear data falsa
+// export async function createBlog(req: any, res: Response): Promise<Response> {
+//     try {
+//         let principalImagePath;
+//         let dateEdited, dateCreated, title, views, tag, state;
+//         let content = [
+//             {
+//                 description : 1,
+//                 text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Etiam dignissim diam quis enim lobortis scelerisque. Sit amet venenatis urna cursus eget nunc scelerisque viverra. Purus non enim praesent elementum facilisis leo vel fringilla. Fringilla ut morbi tincidunt augue interdum. Eu feugiat pretium nibh ipsum. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Arcu felis bibendum ut tristique et egestas quis. Consequat id porta nibh venenatis. At tempor commodo ullamcorper a lacus. Leo duis ut diam quam nulla porttitor massa. Et ultrices neque ornare aenean euismod. Sem integer vitae justo eget magna fermentum iaculis eu non. Neque laoreet suspendisse interdum consectetur. Sit amet mattis vulputate enim. Accumsan in nisl nisi scelerisque eu ultrices. At elementum eu facilisis sed odio morbi quis commodo odio. Morbi enim nunc faucibus a pellentesque. Elementum integer enim neque volutpat ac tincidunt vitae semper quis.",
+//                 multimediaType : "N",
+//                 multimediaPosition : "",
+//                 descPath : ""
+//             },
+//             {
+//                 description : 2,
+//                 text : "A diam maecenas sed enim ut. Aliquam vestibulum morbi blandit cursus risus at. Bibendum arcu vitae elementum curabitur vitae nunc sed velit. Pellentesque habitant morbi tristique senectus et netus. Neque laoreet suspendisse interdum consectetur libero id faucibus nisl. Adipiscing bibendum est ultricies integer quis auctor elit sed. Maecenas sed enim ut sem viverra aliquet eget sit. Sed arcu non odio euismod lacinia. Volutpat blandit aliquam etiam erat velit. Augue neque gravida in fermentum et sollicitudin. Donec ac odio tempor orci dapibus ultrices in iaculis. Urna et pharetra pharetra massa massa ultricies. Lacus luctus accumsan tortor posuere ac ut consequat. Vitae tempus quam pellentesque nec nam aliquam. Egestas dui id ornare arcu. Eget lorem dolor sed viverra. Ac ut consequat semper viverra.",
+//                 multimediaType : "N",
+//                 multimediaPosition : "",
+//                 descPath : ""
+//             }
+//         ];
+//         let start:any = new Date(2020, 0, 1);
+//         let end:any = new Date();
+//         let startHour = 0;
+//         let endHour = 24;
+//         let tagArray = ["645fd9997613ca2100243b11", "645fd9a97613ca2100243b12", "645fd9bb7613ca2100243b13", "645fda117613ca2100243b14"]
+//         let array = [];
+//         for (let i = 0; i < 211; i++) {
+//             var date = new Date(+start + Math.random() * (end - start));
+//             var hour = startHour + Math.random() * (endHour - startHour) | 0;
+//             date.setHours(hour);
+//             principalImagePath = "";
+//             dateCreated = date;
+//             dateEdited = date;
+//             title = "Titulo de prueba haciendo uso de la fecha " + date.toString() + " en el ciclo " + i;
+//             views = Math.floor(Math.random() * 1000);
+//             tag = tagArray[Math.floor(Math.random() * 3)];
+//             state = "C"
+//             const newBlog = { title, views, tag, dateEdited, dateCreated, content, state, principalImagePath};
+//             const blog = new Blog(newBlog);
+//             array.push(blog)
+//             await blog.save();
+//         }
+//         return res.json({
+//             message: 'Blog creado'
+//         });
+//     } catch (error) {
+//         console.log(" ****************** Error en createBlog ==>", error);
+//         return res.status(500).send("Ocurrio un problema al crear el blog");
+//     }
+// };
 async function createBlog(req, res) {
     try {
         let principalImagePath;

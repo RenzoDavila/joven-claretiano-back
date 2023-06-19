@@ -18,8 +18,9 @@ router.route('/login/')
     .post(multer_1.default.single('file'), login_controller_1.login);
 // routes users
 router.route('/users/')
-    .get(user_controller_1.getUsers)
     .post(multer_1.default.single('file'), user_controller_1.createUser);
+router.route('/users/:number/:page/:sort')
+    .get(user_controller_1.getUsers);
 router.route('/users/:id')
     .get(user_controller_1.getUser)
     .delete(user_controller_1.deleteUser)
