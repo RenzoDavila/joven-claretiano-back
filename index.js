@@ -1,6 +1,7 @@
 const express = require("express");
 const conectarDB = require("./config/db");
 const cors = require("cors");
+const path = require('path');
 
 //creamos el servidor
 
@@ -14,14 +15,13 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({mensaje: 'Esta es la API de la FDPB Arequipa'})
+  res.json({mensaje: 'Esta es la API del joven claretiano'})
 });
-app.use("/api/cargos", require("./routes/cargo"));
-app.use("/api/clubes", require("./routes/club"));
-app.use("/api/dirigentes", require("./routes/dirigente"));
-app.use("/api/entrenadores", require("./routes/entrenador"));
-app.use("/api/jugadores", require("./routes/jugador"));
-app.use("/api/categorias", require("./routes/categoria"));
+app.use("/api/tags", require("./routes/tag"));
+app.use("/api/blogs", require("./routes/blog"));
+// app.use("/api/users", require("./routes/user"));
+// app.use("/api/login", require("./routes/login"));
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 app.listen(4000, () => {
   console.log("Corriendo en 4000");
