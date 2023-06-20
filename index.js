@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/tags", require("./routes/tag"));
 app.use("/api/blogs", require("./routes/blog"));
-// app.use("/api/users", require("./routes/user"));
-// app.use("/api/login", require("./routes/login"));
+app.use("/api/users", require("./routes/user"));
+app.use("/api/login", require("./routes/login"));
 app.use('/uploads', express.static(path.resolve('uploads')));
 
 app.listen(4000, () => {
