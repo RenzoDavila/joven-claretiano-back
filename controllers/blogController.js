@@ -308,7 +308,8 @@ exports.deleteBlog = async (req, res) => {
                 }
             });
         }
-        return res.json({ message: 'Blog eliminado', blog: blog });
+        // return res.json({ message: 'Blog eliminado', blog: blog });
+        return res.json({ message: `Blog "${blog.title}" eliminado` });
     }
     catch (error) {
         console.log(" ****************** Error en deleteBlog ==>", error);

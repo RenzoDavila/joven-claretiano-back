@@ -14,7 +14,7 @@ exports.getUsers = async (req, res) => {
         data.registers = 0;
         data.pagination = 0;
         data.page = 0;
-        console.log("sort", sort);
+        
         let registers = await User.find().count();
         if (registers > 0) {
             pagination = Math.floor(registers / num);
@@ -58,8 +58,10 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar } = req.body;
-        const body = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar };
+        const user = await User.findById(id);
+        const { codigo, nombres, apellidos, email, estado, ver, crear, editar, eliminar } = req.body;
+        let password = user.password;
+        let body = { codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar };
         const updatedUser = await User.findByIdAndUpdate(id, {
             codigo, nombres, apellidos, email, password, estado, ver, crear, editar, eliminar
         });
