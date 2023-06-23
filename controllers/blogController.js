@@ -89,7 +89,7 @@ exports.createBlog = async (req, res) => {
             let end = new Date();
             let startHour = 0;
             let endHour = 24;
-            let tagArray = ["645fd9a97613ca2100243b12", "645fd9bb7613ca2100243b13", "645fda117613ca2100243b14"]
+            let tagArray = ["6490f43ce49e831c7030c4b6", "6491178dab96d2090cde2f86", "649117da745c041374849899", "64946a73973fd3001447de23"]
             let array = [];
             for (let i = 0; i < 40; i++) {
                 var date = new Date(+start + Math.random() * (end - start));
