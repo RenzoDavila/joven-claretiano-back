@@ -67,7 +67,8 @@ exports.getBlogsPopular = async (req, res) => {
 
 exports.createExampleBlogs = async (req, res) => {
         try {
-            const { num } = req.body;
+            const { number } = req.body;
+            const num = Number(number);
             let principalImagePath;
             let dateEdited, dateCreated, title, views, tag, state;
             let content = [
