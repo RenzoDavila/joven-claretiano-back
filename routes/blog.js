@@ -28,12 +28,15 @@ router.post("/", upload.fields([
     { name: 'files8' },
     { name: 'files9' }
 ]),blogController.createBlog);
+router.post("/exampleBlogs", blogController.createExampleBlogs);
+
 router.get("/:number/:page/:sort", blogController.getBlogs);
+router.get("/:id", blogController.getBlog);
 router.get("/last/:number", blogController.getBlogsLast);
 router.get("/popular/:number", blogController.getBlogsPopular);
 router.get("/blogsAddView/:id", blogController.getBlogAddView);
+
 router.put("/:id", blogController.updateBlog);
-router.get("/:id", blogController.getBlog);
 router.delete("/:id", blogController.deleteBlog);
 
 module.exports = router;

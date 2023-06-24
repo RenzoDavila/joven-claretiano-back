@@ -65,8 +65,9 @@ exports.getBlogsPopular = async (req, res) => {
     }
 };
 
-exports.createBlog = async (req, res) => {
+exports.createExampleBlogs = async (req, res) => {
         try {
+            const { num } = req.body;
             let principalImagePath;
             let dateEdited, dateCreated, title, views, tag, state;
             let content = [
@@ -91,7 +92,7 @@ exports.createBlog = async (req, res) => {
             let endHour = 24;
             let tagArray = ["6490f43ce49e831c7030c4b6", "6491178dab96d2090cde2f86", "649117da745c041374849899", "64946a73973fd3001447de23"]
             let array = [];
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < num; i++) {
                 var date = new Date(+start + Math.random() * (end - start));
                 var hour = startHour + Math.random() * (endHour - startHour) | 0;
                 date.setHours(hour);
@@ -108,7 +109,8 @@ exports.createBlog = async (req, res) => {
                 await blog.save();
             }
             return res.json({
-                message: 'Blog creado'
+                message: 'Blog creado',
+                array
             });
         } catch (error) {
             console.log(" ****************** Error en createBlog ==>", error);
@@ -116,104 +118,104 @@ exports.createBlog = async (req, res) => {
         }
 };
 
-// exports.createBlog = async (req, res) => {
-//     try {
-//         let principalImagePath;
-//         const { title, views, tag, content, state } = req.body;
-//         let { dateEdited, dateCreated } = req.body;
-//         const filter = content.filter((t) => t.multimediaType != 'N');
-//         dateCreated = new Date(dateCreated);
-//         dateEdited = new Date(dateEdited);
-//         if (filter.length > 0) {
-//             switch (filter[0].file) {
-//                 case 'files0':
-//                     principalImagePath = req.files.files0[0].path;
-//                     break;
-//                 case 'files1':
-//                     principalImagePath = req.files.files1[0].path;
-//                     break;
-//                 case 'files2':
-//                     principalImagePath = req.files.files2[0].path;
-//                     break;
-//                 case 'files3':
-//                     principalImagePath = req.files.files3[0].path;
-//                     break;
-//                 case 'files4':
-//                     principalImagePath = req.files.files4[0].path;
-//                     break;
-//                 case 'files5':
-//                     principalImagePath = req.files.files5[0].path;
-//                     break;
-//                 case 'files6':
-//                     principalImagePath = req.files.files6[0].path;
-//                     break;
-//                 case 'files7':
-//                     principalImagePath = req.files.files7[0].path;
-//                     break;
-//                 case 'files8':
-//                     principalImagePath = req.files.files8[0].path;
-//                     break;
-//                 case 'files9':
-//                     principalImagePath = req.files.files9[0].path;
-//                     break;
-//                 default:
-//                     principalImagePath = '';
-//                     break;
-//             }
-//         }
-//         else {
-//             principalImagePath = "";
-//         }
-//         content.map((item) => {
-//             switch (item.file) {
-//                 case 'files0':
-//                     item.imagePath = req.files.files0[0].path;
-//                     break;
-//                 case 'files1':
-//                     item.imagePath = req.files.files1[0].path;
-//                     break;
-//                 case 'files2':
-//                     item.imagePath = req.files.files2[0].path;
-//                     break;
-//                 case 'files3':
-//                     item.imagePath = req.files.files3[0].path;
-//                     break;
-//                 case 'files4':
-//                     item.imagePath = req.files.files4[0].path;
-//                     break;
-//                 case 'files5':
-//                     item.imagePath = req.files.files5[0].path;
-//                     break;
-//                 case 'files6':
-//                     item.imagePath = req.files.files6[0].path;
-//                     break;
-//                 case 'files7':
-//                     item.imagePath = req.files.files7[0].path;
-//                     break;
-//                 case 'files8':
-//                     item.imagePath = req.files.files8[0].path;
-//                     break;
-//                 case 'files9':
-//                     item.imagePath = req.files.files9[0].path;
-//                     break;
-//                 default:
-//                     item.imagePath = '';
-//                     break;
-//             }
-//         });
-//         const newBlog = { title, views, tag, dateEdited, dateCreated, content, state, principalImagePath };
-//         const blog = new Blog(newBlog);
-//         await blog.save();
-//         return res.json({
-//             message: 'Blog creado',
-//             blog
-//         });
-//     }
-//     catch (error) {
-//         console.log(" ****************** Error en createBlog ==>", error);
-//         return res.status(500).send("Ocurrio un problema al crear el blog");
-//     }
-// };
+exports.createBlog = async (req, res) => {
+    try {
+        let principalImagePath;
+        const { title, views, tag, content, state } = req.body;
+        let { dateEdited, dateCreated } = req.body;
+        const filter = content.filter((t) => t.multimediaType != 'N');
+        dateCreated = new Date(dateCreated);
+        dateEdited = new Date(dateEdited);
+        if (filter.length > 0) {
+            switch (filter[0].file) {
+                case 'files0':
+                    principalImagePath = req.files.files0[0].path;
+                    break;
+                case 'files1':
+                    principalImagePath = req.files.files1[0].path;
+                    break;
+                case 'files2':
+                    principalImagePath = req.files.files2[0].path;
+                    break;
+                case 'files3':
+                    principalImagePath = req.files.files3[0].path;
+                    break;
+                case 'files4':
+                    principalImagePath = req.files.files4[0].path;
+                    break;
+                case 'files5':
+                    principalImagePath = req.files.files5[0].path;
+                    break;
+                case 'files6':
+                    principalImagePath = req.files.files6[0].path;
+                    break;
+                case 'files7':
+                    principalImagePath = req.files.files7[0].path;
+                    break;
+                case 'files8':
+                    principalImagePath = req.files.files8[0].path;
+                    break;
+                case 'files9':
+                    principalImagePath = req.files.files9[0].path;
+                    break;
+                default:
+                    principalImagePath = '';
+                    break;
+            }
+        }
+        else {
+            principalImagePath = "";
+        }
+        content.map((item) => {
+            switch (item.file) {
+                case 'files0':
+                    item.imagePath = req.files.files0[0].path;
+                    break;
+                case 'files1':
+                    item.imagePath = req.files.files1[0].path;
+                    break;
+                case 'files2':
+                    item.imagePath = req.files.files2[0].path;
+                    break;
+                case 'files3':
+                    item.imagePath = req.files.files3[0].path;
+                    break;
+                case 'files4':
+                    item.imagePath = req.files.files4[0].path;
+                    break;
+                case 'files5':
+                    item.imagePath = req.files.files5[0].path;
+                    break;
+                case 'files6':
+                    item.imagePath = req.files.files6[0].path;
+                    break;
+                case 'files7':
+                    item.imagePath = req.files.files7[0].path;
+                    break;
+                case 'files8':
+                    item.imagePath = req.files.files8[0].path;
+                    break;
+                case 'files9':
+                    item.imagePath = req.files.files9[0].path;
+                    break;
+                default:
+                    item.imagePath = '';
+                    break;
+            }
+        });
+        const newBlog = { title, views, tag, dateEdited, dateCreated, content, state, principalImagePath };
+        const blog = new Blog(newBlog);
+        await blog.save();
+        return res.json({
+            message: 'Blog creado',
+            blog
+        });
+    }
+    catch (error) {
+        console.log(" ****************** Error en createBlog ==>", error);
+        return res.status(500).send("Ocurrio un problema al crear el blog");
+    }
+};
 
 exports.updateBlog = async (req, res) => {
     try {
