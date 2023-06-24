@@ -69,6 +69,7 @@ exports.createExampleBlogs = async (req, res) => {
         try {
             const { number } = req.body;
             const num = Number(number);
+            console.log("entre en createExampleBlogs y num es:", num)
             let principalImagePath;
             let dateEdited, dateCreated, title, views, tag, state;
             let content = [
@@ -107,6 +108,7 @@ exports.createExampleBlogs = async (req, res) => {
                 const newBlog = { title, views, tag, dateEdited, dateCreated, content, state, principalImagePath};
                 const blog = new Blog(newBlog);
                 array.push(blog)
+                console.log("nuevo blog creado: ", blog.title)
                 await blog.save();
             }
             return res.json({
