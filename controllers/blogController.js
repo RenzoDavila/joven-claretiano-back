@@ -66,6 +66,7 @@ exports.getBlogsPopular = async (req, res) => {
 };
 
 exports.createExampleBlogs = async (req, res) => {
+    console.log("entre en createExampleBlogs antes del try")
         try {
             const { number } = req.body;
             const num = Number(number);
