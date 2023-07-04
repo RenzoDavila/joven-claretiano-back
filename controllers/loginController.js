@@ -1,19 +1,21 @@
 const Login = require("../models/Login");
+const User = require("../models/User");
 const bcryptjs = require('bcryptjs');
 
 exports.login = async (req, res) => {
     try {
-        const { user, pass } = req.body;
+        const { userLogin, passLogin } = req.body;
         const reqOjb = {};
-        if (user.indexOf("@") != -1) {
-            reqOjb.email = user;
+        if (userLogin.indexOf("@") != -1) {
+            reqOjb.email = userLogin;
         }
         else {
-            reqOjb.codigo = user;
+            reqOjb.codigo = userLogin;
         }
-        const login = await Login.findOne(reqOjb);
+        console.log("reqOjb", reqOjb)
+        const login = await User.findOne(reqOjb);
         if (login) {
-            const compare = bcryptjs.compareSync(pass, login.password);
+            const compare = bcryptjs.compareSync(passLogin, login.password);
             if (compare) {
                 return res.json(login);
             }

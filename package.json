@@ -4,6 +4,7 @@
   "description": "API del joven-claretiano",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "4ever": "forever start index.js"
   },
