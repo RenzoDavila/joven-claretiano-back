@@ -5,6 +5,8 @@ const bcryptjs = require('bcryptjs');
 exports.login = async (req, res) => {
     try {
         const { userLogin, passLogin } = req.body;
+        console.log("userLogin",userLogin)
+        console.log("passLogin",passLogin)
         const reqOjb = {};
         if (userLogin.indexOf("@") != -1) {
             reqOjb.email = userLogin;
@@ -12,7 +14,6 @@ exports.login = async (req, res) => {
         else {
             reqOjb.codigo = userLogin;
         }
-        console.log("reqOjb", reqOjb)
         const login = await User.findOne(reqOjb);
         if (login) {
             const compare = bcryptjs.compareSync(passLogin, login.password);
